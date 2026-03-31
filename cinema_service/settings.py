@@ -113,6 +113,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "user.User"
 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "cinema.pagination.order_pagination.OrderPagination",
+    "PAGE_SIZE": 10,
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 

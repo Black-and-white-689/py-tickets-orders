@@ -14,7 +14,8 @@ from cinema.serializers import (
     MovieDetailSerializer,
     MovieSessionDetailSerializer,
     MovieListSerializer,
-    OrderSerializer, OrderCreateSerializer,
+    OrderSerializer,
+    OrderCreateSerializer,
 )
 
 
@@ -103,7 +104,6 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
 
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    pagination_class = OrderPagination
 
     def get_queryset(self):
         return (
@@ -119,6 +119,3 @@ class OrderViewSet(viewsets.ModelViewSet):
         if self.action == "create":
             return OrderCreateSerializer
         return OrderSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
