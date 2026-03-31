@@ -70,7 +70,6 @@ class MovieViewSet(viewsets.ModelViewSet):
         return queryset.distinct()
 
 
-
 class MovieSessionViewSet(viewsets.ModelViewSet):
     queryset = MovieSession.objects.select_related(
         "movie",
