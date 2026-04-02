@@ -94,27 +94,23 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation." 
-                "UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation." "UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation." 
-                "MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation." "MinimumLengthValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation." 
-                "CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation." "CommonPasswordValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation." 
-                "NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation." "NumericPasswordValidator",  # noqa: E501
     },
 ]
 
 AUTH_USER_MODEL = "user.User"
 
 REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "cinema.pagination.order_pagination.OrderPagination",
+    "DEFAULT_PAGINATION_CLASS": "cinema.pagination.order_pagination.OrderPagination",  # noqa: E501
     "PAGE_SIZE": 10,
 }
 
