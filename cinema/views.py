@@ -1,5 +1,8 @@
 from rest_framework import viewsets
+
 from rest_framework.permissions import IsAuthenticated
+
+from cinema.pagination.order_pagination import OrderPagination
 
 from cinema.models import (
     Genre,
@@ -25,26 +28,26 @@ from cinema.serializers import (
 )
 
 
-class GenreViewSet(viewsets.ModelViewSet):
+class BaseNoPaginationViewSet(viewsets.ModelViewSet):
     pagination_class = None
+
+
+class GenreViewSet(BaseNoPaginationViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
 
-class ActorViewSet(viewsets.ModelViewSet):
-    pagination_class = None
+class ActorViewSet(BaseNoPaginationViewSet):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
 
-class CinemaHallViewSet(viewsets.ModelViewSet):
-    pagination_class = None
+class CinemaHallViewSet(BaseNoPaginationViewSet):
     queryset = CinemaHall.objects.all()
     serializer_class = CinemaHallSerializer
 
 
-class MovieViewSet(viewsets.ModelViewSet):
-    pagination_class = None
+class MovieViewSet(BaseNoPaginationViewSet):
     queryset = Movie.objects.prefetch_related(
         "genres",
         "actors",
@@ -81,8 +84,7 @@ class MovieViewSet(viewsets.ModelViewSet):
         return queryset.distinct()
 
 
-class MovieSessionViewSet(viewsets.ModelViewSet):
-    pagination_class = None
+class MovieSessionViewSet(BaseNoPaginationViewSet):
     queryset = MovieSession.objects.select_related(
         "movie",
         "cinema_hall",
@@ -115,6 +117,7 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
 
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
+    pagination_class = OrderPagination
 
     def get_queryset(self):
         return (
